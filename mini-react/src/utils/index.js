@@ -1,0 +1,1 @@
+export const BASE_URL = "http://codetrau.com:8082/order/beerOrders"
