@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import AddProduct from './AddProduct'
 import {
     BrowserRouter as Router,
     Switch,
@@ -33,6 +33,7 @@ function PrivateRoute({ children, ...rest }) {
                 )
             }
         />
+
     );
 }
 
