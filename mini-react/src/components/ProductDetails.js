@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useRouteMatch } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import { Jumbotron, Button } from 'reactstrap';
 import fakeimg from '../assets/img/fake.jpg';
 import * as BEERAPP from './../utils/index';
 import axios from 'axios'
+
 ProductDetails.propTypes = {
 
 };
@@ -52,7 +53,8 @@ function ProductDetails(props) {
             setCountBeer(countBeer + 1)
         }
     }
-    const totalPrice = countBeer * priceTamp
+    const totalPrice = countBeer * priceTamp;
+    let history = useHistory();
     const orderBeer = (indexOrderB, quantity) => {
         const orderNow = Date.now();
         var dateobj = new Date(orderNow);
@@ -203,6 +205,7 @@ function ProductDetails(props) {
                 // console.log(response);
                 console.log(response)
                 if (response.status == 200) {
+                    history.push('/CartProduct')
                     alert('ORDER THANH CONG')
                 } else {
                     alert('ORDER THAT BAI')
@@ -223,6 +226,7 @@ function ProductDetails(props) {
             <h1>THÔNG TIN ĐƠN HÀNG {authFakeLocal}</h1>
             <div className="wrap-product-details-app">
                 {stateData.map((itemOrder, index) => {
+                    // console.log(itemOrder)
                     var quantity = itemOrder.productOrderItem[0].quantity
                     // console.log(itemOrder)
                     return (
