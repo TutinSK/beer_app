@@ -1,29 +1,28 @@
 import { useState } from "react";
 
 import { useHistory } from "react-router-dom";
+import validation from "./Validation"
 
 function Register() {
-    let history = useHistory(); // hoc ve router
-    const [loginForm, setLoginForm] = useState({
-        userName: '',
-        password: '',
-    });
+    const history = useHistory()
+    const [values, setValues] = useState({
+        username:"",
+        password: "",
+        email:"",
+        phoneNumber:"",
+    })
+    const [errors, setErrors] = useState({})
+    const handleChange = (event) => {
+        setValues({
+        ...values, [event.target.name]: event.target.value
+        });
+    }
 
-    const handleLoginUser = (event) => {
-        setLoginForm({ ...loginForm, [event.target.name]: event.target.value })
+    const handleRegisterForm = (event) => {
+        event.preventDefault();
+
     }
-    const handleLoginForm = () => {
-        if (loginForm.userName === 'admin' && loginForm.password === 'admin') {
-            localStorage.setItem("user", 'admin');
-            history.push("/products");
-        }
-        if (loginForm.userName === '' || loginForm.password === '') { //Logical OR (||) - JavaScript | MDN
-            //validate Styles
-        }
-        else {
-            //validate Styles
-        }
-    }
+    
     return (
         <div className="container">
             <div className="auth-form">
@@ -36,21 +35,33 @@ function Register() {
                 </div>
                 <div className="auth-form__form">
                     <div className="auth-form__group">
-                        <input onChange={handleLoginUser} name="userName" type="text" className="auth-form__input" placeholder="Tên đăng nhập" />
+                        <input value={values.username} name="userName" type="text" 
+                            onChange={handleChange}
+                        className="auth-form__input" placeholder="Tên đăng nhập" />
+                        <p className="text-error">{validationMsg.username}</p>
                     </div>
                     <div className="auth-form__group">
-                        <input onChange={handleLoginUser} name="password" type="password" className="auth-form__input" placeholder="Mật khẩu" />
+                        <input value={values.password} name="password" type="password" 
+                        onChange={handleChange}
+                        className="auth-form__input" placeholder="Mật khẩu" />
+                        <p className="text-error">{validationMsg.password}</p>
                     </div>
                     <div className="auth-form__group">
-                        <input name="mailAddress" type="text" className="auth-form__input" placeholder="Địa chỉ Email" />
+                        <input value={values.email} name="mailAddress" type="text" 
+                        onChange={handleChange}
+                        className="auth-form__input" placeholder="Địa chỉ Email" />
+                        <p className="text-error">{validationMsg.email}</p>
                     </div>
                     <div className="auth-form__group">
-                        <input name="phoneNumber" type="text" className="auth-form__input" placeholder="Số điện thoại" />
+                        <input value={values.phoneNumber} name="phoneNumber" type="text" 
+                        onChange={handleChange}
+                        className="auth-form__input" placeholder="Số điện thoại" />
+                        <p className="text-error">{validationMsg.phoneNumber}</p>
                     </div>
 
                 </div>
                 <div className="footer_btn">
-                    <button onClick={handleLoginForm} className="register">Đăng ký</button>
+                    <button onClick={handleRegisterForm} className="register">Đăng ký</button>
                 </div>
             </div>
         </div>

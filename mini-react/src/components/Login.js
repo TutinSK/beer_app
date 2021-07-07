@@ -44,6 +44,9 @@ return (
                     </div>
 
                 </div>
+                <div className="forgot_password">
+                    <a href="https://www.google.com/">Forgot Password?</a>
+                </div>
                 <div className="footer_btn">
                     <button onClick={handleLoginForm} className="login">Đăng Nhập</button>
                 </div>
