@@ -3,6 +3,7 @@ import { Table } from 'reactstrap';
 import { ButtonToggle } from "reactstrap";
 import axios from 'axios'
 import * as BEERAPP from './../utils/index';
+import { useHistory } from 'react-router-dom';
 
 function ProcessProduct(props) {
 
@@ -27,18 +28,133 @@ function ProcessProduct(props) {
     }, [])
 
     const hendleReject = (idOrder) => {
+        //completed
         alert('reject' + idOrder)
     }
-
+    let history = useHistory();
 
     const handleComPlete = (idOrder) => {
-        alert('Complete' + idOrder)
+        const sendData = {
+            "id": idOrder,
+            "href": null,
+            "nameProduct": "Bia Hà Nội tu client",
+            "price": 100000000000,
+            "cancellationDate": null,
+            "cancellationReason": null,
+            "category": null,
+            "completionDate": null,
+            "description": null,
+            "expectedCompletionDate": null,
+            "externalId": null,
+            "notificationContact": null,
+            "orderDate": null, //ISO 8601 2021-07-07T02:40:09.541Z
+            "priority": null,
+            "requestedCompletionDate": null,
+            "requestedStartDate": null,
+            "agreement": null,
+            "billingAccount": null,
+            "channel": null,
+            "note": [
+                {
+                    "id": "333333333333333",
+                    "author": null,
+                    "date": null,
+                    "text": "http://www.tesst.com",
+                    "@baseType": null,
+                    "@schemaLocation": null,
+                    "@type": "Note"
+                }
+            ],
+            // "orderTotalPrice": null,
+            "orderTotalPrice": [
+
+                {
+                    "@baseType": "string",
+                    "@schemaLocation": null,
+                    "@type": "string",
+                    "billingAccount": {
+                        "@baseType": "string",
+                        "@referredType": "string",
+                        "@schemaLocation": null,
+                        "@type": "string",
+                        "href": "string",
+                        "id": "string",
+                        "name": "string"
+                    },
+                    "description": "string",
+                    "name": "string",
+                    "price": {
+                        "@baseType": "string",
+                        "@schemaLocation": null,
+                        "@type": "string",
+                        "dutyFreeAmount": {
+                            "unit": "string",
+                            "value": 0
+                        },
+                        "percentage": 0,
+                        "taxIncludedAmount": {
+                            "unit": "string",
+                            "value": 0
+                        },
+                        "taxRate": 0
+                    },
+                    "priceAlteration": null,
+                    "priceType": "string",
+                    "productOfferingPrice": {
+                        "@baseType": "string",
+                        "@referredType": "string",
+                        "@schemaLocation": null,
+                        "@type": "string",
+                        "href": "string",
+                        "id": "string",
+                        "name": "string"
+                    },
+                    "recurringChargePeriod": "string",
+                    "unitOfMeasure": "string"
+                }
+            ],
+            "payment": null,
+            "productOfferingQualification": null,
+            "quote": [
+                {
+                    "validFor": null,
+                    "state": null,
+                    "note": null,
+                    "lastStateChangedDate": null,
+                    "id": "00000007",
+                    "href": null,
+                    "name": "BIA ORDER-DEMO",
+                    "@baseType": null,
+                    "@schemaLocation": null,
+                    "@type": "QuoteRef",
+                    "@referredType": null
+                }
+            ],
+            "state": "completed",//inProgress
+            "@baseType": null,
+            "@schemaLocation": null,
+            "@type": "BeerOrder"
+        }
+
+        axios.post(`${BEERAPP.BASE_URL}`, sendData)
+            .then(function (response) {
+                // console.log(response);
+                if (response.status == 200) {
+                    alert('ORDER THANH CONG')
+
+                } else {
+                    alert('ORDER THAT BAI')
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
 
     const renderOrder = fakeApi.length > 0 ? fakeApi.map((item, index) => {
-        console.log()
         if (item.state == 'inProgress') {
+
             return (
                 <tbody>
                     <tr>
@@ -64,7 +180,7 @@ function ProcessProduct(props) {
     }) : []
 
     return (
-        <Table dark>
+        <Table>
             <thead>
                 <tr>
                     <th colSpan={3}>danh sach order</th>
