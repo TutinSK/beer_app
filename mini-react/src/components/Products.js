@@ -50,6 +50,8 @@ Products.propTypes = {
 // SCHEDULED("scheduled)"
 function Products(props) {
     const [fakeApi, setFakeApi] = useState([])
+    //export const BASE_URL = "http://codetrau.com:8082/order/beerOrders"
+
     const addProduct = () => {
 
     }

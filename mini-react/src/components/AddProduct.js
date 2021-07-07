@@ -50,6 +50,44 @@ function ProductDetails(props) {
             }
         ],
         "orderTotalPrice": null,
+
+        "productOrderItem": [
+
+            {
+                "id": infoProduct.nameProduct,
+                "description": infoProduct.desProduct,
+                "quantity": infoProduct.priceProduct,
+                "action": "noChange",
+                "payment": null,
+                "productOffering": null,
+                "product": {
+                    "id": "Tiger-123",
+                    "name": "vvv 214",
+                    "place": null,
+                    "relatedParty": null
+                },
+                "itemPrice": [
+                    {
+                        "name": null,
+                        "priceType": "one time",
+                        "description": "beer",
+                        "priceAlteration": [],
+                        "price": {
+                            "taxRate": 19,
+                            "percentage": 0,
+                            "dutyFreeAmount": {
+                                "value": 2500000,
+                                "unit": "VND"
+                            },
+                            "taxIncludedAmount": {
+                                "value": 25000,
+                                "unit": "VBD"
+                            }
+                        }
+                    }
+                ]
+            }
+        ],
         "payment": null,
         "productOfferingQualification": null,
         "quote": [
@@ -76,7 +114,7 @@ function ProductDetails(props) {
     const addProducts = () => {
         axios.post(`${BEERAPP.BASE_URL}`, sendData)
             .then(function (response) {
-                // console.log(response);
+                console.log(response);
                 if (response.status == 200) {
                     alert('them thanh cong')
                 } else {
@@ -88,7 +126,8 @@ function ProductDetails(props) {
             });
         setInfoProduct({
             nameProduct: '',
-            desProduct: ''
+            desProduct: '',
+            priceProduct: 0
         })
     }
     const handleInfoProduct = (e) => {
@@ -106,6 +145,17 @@ function ProductDetails(props) {
                     <Label for="exampleText">Mô tả sản phẩm</Label>
                     <Input value={infoProduct.desProduct} onChange={handleInfoProduct} type="textarea" name="desProduct" id="exampleText" />
                 </FormGroup>
+
+                <FormGroup>
+                    <Label for="exampleText">Số lượng sản phẩm</Label>
+                    <Input value={infoProduct.priceProduct} onChange={handleInfoProduct} type="number" name="priceProduct" id="exampleText" />
+                </FormGroup>
+                {/*
+                <FormGroup>
+                    <Label for="exampleText">Giá sản phẩm</Label>
+                    <Input value={infoProduct.desProduct} onChange={handleInfoProduct} type="textarea" name="desProduct" id="exampleText" />
+                </FormGroup> */}
+
                 <Button onClick={addProducts}>Thêm sản phẩm</Button>
             </Form>
         </div>

@@ -10,6 +10,8 @@ import ProductDetails from './components/ProductDetails';
 
 import AddProduct from './components/AddProduct';
 
+import ProcessProduct from './components/ProcessProduct';
+
 
 import PrivateRoute from './components/PrivateRoute';
 
@@ -49,13 +51,15 @@ function App() {
               return <ProductDetails rest={rest} match={match} />;
             }}
           />
-
-          <PrivateRoute exact path="/">
-            <Products />
-          </PrivateRoute>
           <Route path='/addpro' >
             <AddProduct />
           </Route>
+          <Route path='/processpro' >
+            <ProcessProduct />
+          </Route>
+          <PrivateRoute exact path="/">
+            <Products />
+          </PrivateRoute>
         </Switch>
       </Router>
 

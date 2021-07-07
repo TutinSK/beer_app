@@ -30,7 +30,6 @@ function ProductDetails(props) {
         }
 
     }
-    // console.log(props.match.params.slug)
     const [countBeer, setCountBeer] = useState(1)
     const [priceTamp, setPriceTamp] = useState(25000)
     let match = useRouteMatch("/products/:slug");
@@ -54,7 +53,10 @@ function ProductDetails(props) {
         }
     }
     const totalPrice = countBeer * priceTamp
-    const orderBeer = (indexOrderB) => {
+    const orderBeer = (indexOrderB, quantity) => {
+        const orderNow = Date.now();
+        var dateobj = new Date(orderNow);
+        var convertDateISO = dateobj.toISOString();
 
         const sendData = {
             "id": indexOrderB,
@@ -69,7 +71,7 @@ function ProductDetails(props) {
             "expectedCompletionDate": null,
             "externalId": null,
             "notificationContact": null,
-            "orderDate": null,
+            "orderDate": convertDateISO, //ISO 8601 2021-07-07T02:40:09.541Z
             "priority": null,
             "requestedCompletionDate": null,
             "requestedStartDate": null,
@@ -87,7 +89,91 @@ function ProductDetails(props) {
                     "@type": "Note"
                 }
             ],
-            "orderTotalPrice": null,
+            // "orderTotalPrice": null,
+            "orderTotalPrice": [
+
+                {
+                    "@baseType": "string",
+                    "@schemaLocation": null,
+                    "@type": "string",
+                    "billingAccount": {
+                        "@baseType": "string",
+                        "@referredType": "string",
+                        "@schemaLocation": null,
+                        "@type": "string",
+                        "href": "string",
+                        "id": "string",
+                        "name": "string"
+                    },
+                    "description": "string",
+                    "name": "string",
+                    "price": {
+                        "@baseType": "string",
+                        "@schemaLocation": null,
+                        "@type": "string",
+                        "dutyFreeAmount": {
+                            "unit": "string",
+                            "value": 0
+                        },
+                        "percentage": 0,
+                        "taxIncludedAmount": {
+                            "unit": "string",
+                            "value": 0
+                        },
+                        "taxRate": 0
+                    },
+                    "priceAlteration": null,
+                    "priceType": "string",
+                    "productOfferingPrice": {
+                        "@baseType": "string",
+                        "@referredType": "string",
+                        "@schemaLocation": null,
+                        "@type": "string",
+                        "href": "string",
+                        "id": "string",
+                        "name": "string"
+                    },
+                    "recurringChargePeriod": "string",
+                    "unitOfMeasure": "string"
+                }
+            ],
+            "productOrderItem": [
+
+                {
+                    "id": "Tiger-123",
+                    "quantity": quantity - countBeer,
+                    "action": "noChange",
+                    "payment": null,
+                    "productOffering": null,
+                    "product": {
+                        "id": "Tiger-123",
+                        "name": "vvv 214",
+                        "place": null,
+                        "relatedParty": null
+                    },
+                    "itemPrice": [
+                        {
+                            "name": null,
+                            "priceType": "one time",
+                            "description": "beer",
+                            "priceAlteration": [],
+                            "price": {
+                                "taxRate": 19,
+                                "percentage": 0,
+                                "dutyFreeAmount": {
+                                    "value": 2500000,
+                                    "unit": "VND"
+                                },
+                                "taxIncludedAmount": {
+                                    "value": priceTamp * countBeer,
+                                    "unit": "VBD"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+
             "payment": null,
             "productOfferingQualification": null,
             "quote": [
@@ -128,12 +214,16 @@ function ProductDetails(props) {
 
 
     }
+    const authFakeLocal = localStorage.getItem('user');
+
     // console.log(fakeApi)
     return (
         <>
-            <h1>THÔNG TIN ĐƠN HÀNG</h1>
+
+            <h1>THÔNG TIN ĐƠN HÀNG {authFakeLocal}</h1>
             <div className="wrap-product-details-app">
                 {stateData.map((itemOrder, index) => {
+                    var quantity = itemOrder.productOrderItem[0].quantity
                     // console.log(itemOrder)
                     return (
                         <div className="wrap-product-details">
@@ -167,7 +257,7 @@ function ProductDetails(props) {
                                     {priceTamp * countBeer}d <br />
                                     SIZE M
                                 </div>
-                                <div onClick={() => { orderBeer(itemOrder.id) }} className="payment-left">
+                                <div onClick={() => { orderBeer(itemOrder.id, quantity) }} className="payment-left">
                                     Đặt hàng
                                 </div>
                             </div>
