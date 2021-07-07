@@ -1,54 +1,16 @@
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
-* {
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-.container {
+.container{
   position: relative;
   background-color: aqua;
   width: 100%;
   height: 100vh;
+
 }
-.auth-form {
+.auth-form{
   position: absolute;
   top: 15%;
   left: 36%;
@@ -57,24 +19,25 @@
   padding: 20px 20px;
   transition: 0.5s;
 }
-.auth-form:hover {
-  box-shadow: 2px 4px 16px 8px rgba(0, 0, 0, 0.71);
+.auth-form:hover{
+  box-shadow: 2px 4px 16px 8px rgba(0,0,0,0.71);
+
 }
 
-.text-top {
+.text-top{
   margin-bottom: 14px;
 }
 
-h2 {
+h2{
   font-weight: 500;
   text-align: center;
 }
 
-.switch_button {
+.switch_button{
   text-align: center;
 }
 
-.switch_button .btn_login {
+.switch_button .btn_login{
   width: 100%;
   height: 50px;
   background-color: white;
@@ -84,24 +47,26 @@ h2 {
   background-repeat: no-repeat;
   background-size: 8%;
   background-position: 4%;
-  cursor: pointer;
+  cursor: pointer; 
   transition: 0.5s;
 }
 
-.btn_login:hover {
-  transform: scale(0.9);
+.btn_login:hover{
+  transform: scale(0.9)
 }
 
-.switch_button .btn_login a {
+.switch_button .btn_login button{
   text-align: center;
   line-height: 50px;
   font-size: 20px;
   font-weight: bold;
+  background-color: white;
   color: grey;
+  border: none;
 }
 
-.switch_button .btn_or {
-  color: grey;
+.switch_button .btn_or{
+  color: grey; 
   width: 100%;
   text-align: center;
   border-bottom: 2px solid grey;
@@ -109,48 +74,67 @@ h2 {
   margin: 30px auto;
 }
 
-.switch_button .btn_or span {
+.switch_button .btn_or span{
   font-weight: bold;
   line-height: 1px;
   background: #fff;
-  padding: 0 10px;
+  padding: 0 10px; 
 }
 
 .auth-form__group input {
   width: 100%;
   height: 50px;
   border-radius: 5px;
-  border: 2px solid #9c9c9c;
+  border: 2px solid #9C9C9C;
   margin-bottom: 15px;
   padding: 0 5px;
 }
 
-.footer_btn {
+
+.footer_btn{
   text-align: center;
 }
-.footer_btn .register {
+.footer_btn .register{
   width: 100%;
   height: 50px;
   border-radius: 5px;
   background-color: aqua;
-  color: #fff;
+  color: #FFF;
   font-weight: 500;
   font-size: 20px;
-  cursor: pointer;
+  cursor: pointer; 
   transition: 0.5s;
 }
 
-.footer_btn button:hover {
+.footer_btn button:hover{
   transform: scale(0.9);
 }
 
-::placeholder {
+::placeholder{
   font-size: 1rem;
   font-weight: bold;
   padding-left: 0 4px;
   color: #ccc;
 }
+/* End register form */
 
+/* Login form */
+.footer_btn .login{
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  background-color: aqua;
+  color: #FFF;
+  font-weight: 500;
+  font-size: 20px;
+  cursor: pointer; 
+  transition: 0.5s;
+}
+
+
+
+/* end Login form */
 .card {
   width: 25%;
 }

@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Register from './components/Register';
 
+import Login from './components/Login';
+
 import Products from './components/Products';
 
 import ProductDetails from './components/ProductDetails';
@@ -43,6 +45,9 @@ function App() {
         <Switch>
           <Route path='/register' >
             <Register />
+          </Route>
+          <Route path='/login'>
+            <Login />
           </Route>
           <Route
             path="/products/:slug"
