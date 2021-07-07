@@ -75,12 +75,13 @@ function Products(props) {
     const handleOrderBeer = (indexBeer) => {
     }
     const renderData = fakeApi.map((itemBeer, index) => {
+        console.log(itemBeer)
         return (
             <Card key={index} >
                 <NavLink to={`/products/${itemBeer.id}`}>
                     <CardImg top width="318px" height="180px" src={fakeimg} alt="Card image cap" />
                     <CardBody>
-                        <CardTitle tag="h5">{itemBeer.category}</CardTitle>
+                        <CardTitle tag="h5">Bia {itemBeer.category == null ? 'demo' : itemBeer.category} </CardTitle>
                         {/* <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle> */}
                         <CardText>{itemBeer.description}</CardText>
                         <Button onClick={() => { handleOrderBeer(itemBeer.id) }}>Buy</Button>

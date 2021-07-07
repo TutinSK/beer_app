@@ -45,12 +45,7 @@ function App() {
       </Router> */}
       <Router>
         <Switch>
-          <Route path='/register' >
-            <Register />
-          </Route>
-          <Route path='/login'>
-            <Login />
-          </Route>
+
           <Route
             path="/products/:slug"
             render={({ match }, ...rest) => {
@@ -66,6 +61,12 @@ function App() {
           </Route>
           <Route path='/cartproduct' >
             <CartProduct />
+          </Route>
+          <Route path='/register' >
+            <Register />
+          </Route>
+          <Route path='/login'>
+            <Login />
           </Route>
           <PrivateRoute exact path="/">
             <Products />

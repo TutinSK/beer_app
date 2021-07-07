@@ -15,7 +15,7 @@ function Register() {
     const handleLoginForm = () => {
         if (loginForm.userName === 'admin' && loginForm.password === 'admin') {
             localStorage.setItem("user", 'admin');
-            history.push("/products");
+            history.push("/");
         }
         if (loginForm.userName === '' || loginForm.password === '') { //Logical OR (||) - JavaScript | MDN
             //validate Styles

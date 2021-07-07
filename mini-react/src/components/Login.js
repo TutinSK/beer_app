@@ -16,7 +16,7 @@ function Login() {
     const handleLoginForm = () => {
         if (loginForm.userName === 'admin' && loginForm.password === 'admin') {
             localStorage.setItem("user", 'admin');
-            history.push("/products");
+            history.push("/");
         }
         if (loginForm.userName === '' || loginForm.password === '') { //Logical OR (||) - JavaScript | MDN
             //validate Styles
@@ -25,8 +25,8 @@ function Login() {
             //validate Styles
         }
     }
-return (
-    <div className="container">
+    return (
+        <div className="container">
             <div className="auth-form">
                 <div className="text-top">
                     <h2>Beer Bar App</h2>
@@ -49,6 +49,6 @@ return (
                 </div>
             </div>
         </div>
-);
+    );
 }
 export default Login;

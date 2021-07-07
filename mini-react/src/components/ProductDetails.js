@@ -226,8 +226,9 @@ function ProductDetails(props) {
             <h1>THÔNG TIN ĐƠN HÀNG {authFakeLocal}</h1>
             <div className="wrap-product-details-app">
                 {stateData.map((itemOrder, index) => {
+                    console.log(itemOrder)
                     // console.log(itemOrder)
-                    var quantity = itemOrder.productOrderItem[0].quantity
+                    var quantity = itemOrder.productOrderItem[0] == undefined ? 1 : itemOrder.productOrderItem[0].quantity
                     // console.log(itemOrder)
                     return (
                         <div className="wrap-product-details">
