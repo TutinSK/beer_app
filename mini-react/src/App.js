@@ -14,6 +14,8 @@ import AddProduct from './components/AddProduct';
 
 import ProcessProduct from './components/ProcessProduct';
 
+import CartProduct from './components/CartProduct';
+
 
 import PrivateRoute from './components/PrivateRoute';
 
@@ -61,6 +63,9 @@ function App() {
           </Route>
           <Route path='/processpro' >
             <ProcessProduct />
+          </Route>
+          <Route path='/cartproduct' >
+            <CartProduct />
           </Route>
           <PrivateRoute exact path="/">
             <Products />
