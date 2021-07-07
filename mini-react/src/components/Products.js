@@ -13,6 +13,7 @@ import {
     Switch,
     Route,
     NavLink,
+    useHistory,
     // Redirect,
     // useHistory,
     // useLocation
@@ -50,6 +51,8 @@ Products.propTypes = {
 // SCHEDULED("scheduled)"
 function Products(props) {
     const [fakeApi, setFakeApi] = useState([])
+    const [arrItemOrder, setArrItemOrder] = useState([])
+    let history = useHistory()
     //export const BASE_URL = "http://codetrau.com:8082/order/beerOrders"
 
     const addProduct = () => {
@@ -72,29 +75,71 @@ function Products(props) {
     useEffect(() => {
         getBeerById()
     }, [])
-    const handleOrderBeer = (indexBeer) => {
+
+    function truncate(str) {
+        if (str != null) {
+            if (str.length >= 50) {
+                var myTruncatedString = str.substring(0, 50) + "...";
+                return myTruncatedString
+            }
+            else {
+                return str
+            }
+        } else {
+            return 'chua co mo ta ve san pham nay...'
+        }
     }
+    var dataArr = []
+
+    const handleOrderBeer = async (indexBeer, itemBeer) => {
+        dataArr.push(itemBeer)
+        // var result = await new Promise((res) => {
+        //     res(dataArr)
+        // })
+        setArrItemOrder([...arrItemOrder, itemBeer])
+
+    }
+    const styleLineHeight = {
+        height: '50px',
+        lineHeight: '50px'
+    }
+    const handleNav = (itemOrderBeer) => {
+        history.push({
+            state: { data: arrItemOrder }
+        })
+    }
+    //console.log(arrItemOrder)
     const renderData = fakeApi.map((itemBeer, index) => {
-        console.log(itemBeer)
+
         return (
             <Card key={index} >
-                <NavLink to={`/products/${itemBeer.id}`}>
-                    <CardImg top width="318px" height="180px" src={fakeimg} alt="Card image cap" />
-                    <CardBody>
-                        <CardTitle tag="h5">Bia {itemBeer.category == null ? 'demo' : itemBeer.category} </CardTitle>
+                <CardImg top width="318px" height="180px" src={fakeimg} alt="Card image cap" />
+                <CardBody>
+                    <NavLink arrItemOrder={arrItemOrder} to={{
+                        // `/products/${itemBeer.id}`
+                        pathname: `/products/${itemBeer.id}`,
+                        state: { dataOrder: arrItemOrder }
+                    }} onClick={() => { handleNav(itemBeer.id) }}>
+                        <CardTitle tag="h5"> {itemBeer.category == null ? 'Bia demo' : itemBeer.category} </CardTitle>
                         {/* <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle> */}
-                        <CardText>{itemBeer.description}</CardText>
-                        <Button onClick={() => { handleOrderBeer(itemBeer.id) }}>Buy</Button>
-                    </CardBody>
-                </NavLink>
-            </Card>
+                        <CardText>{truncate(itemBeer.description)}</CardText>
+                    </NavLink>
+
+                    <Button onClick={() => { handleOrderBeer(itemBeer.id, itemBeer) }}>Add to Cart</Button>
+                </CardBody>
+            </Card >
         )
     })
     return (
         <div>
             {/* Viết danh sách sản phẩm ở đây nhé, giống cách viết trang register */}
-            <h1>Danh sach loai bia</h1>
+
+            <div className="d-flex justify-content-between">
+                <h1 style={styleLineHeight}>Danh sach loai bia</h1>
+                <h2 style={styleLineHeight}>Gio hang </h2>
+            </div>
             <div className="d-flex flex-wrap">
+
                 {renderData}
             </div>
 

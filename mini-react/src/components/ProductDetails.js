@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
 import { Jumbotron, Button } from 'reactstrap';
 import fakeimg from '../assets/img/fake.jpg';
 import * as BEERAPP from './../utils/index';
@@ -11,6 +11,9 @@ ProductDetails.propTypes = {
 };
 
 function ProductDetails(props) {
+    let location = useLocation();
+    console.log(location)
+
     const [fakeApi, setFakeApi] = useState([])
     const [stateData, setStateData] = useState([])
     async function getBeerById() {
@@ -205,7 +208,13 @@ function ProductDetails(props) {
                 // console.log(response);
                 console.log(response)
                 if (response.status == 200) {
+                    // history.push('/CartProduct')
+
                     history.push('/CartProduct')
+
+
+
+
                     alert('ORDER THANH CONG')
                 } else {
                     alert('ORDER THAT BAI')
@@ -226,7 +235,6 @@ function ProductDetails(props) {
             <h1>THÔNG TIN ĐƠN HÀNG {authFakeLocal}</h1>
             <div className="wrap-product-details-app">
                 {stateData.map((itemOrder, index) => {
-                    console.log(itemOrder)
                     // console.log(itemOrder)
                     var quantity = itemOrder.productOrderItem[0] == undefined ? 1 : itemOrder.productOrderItem[0].quantity
                     // console.log(itemOrder)
